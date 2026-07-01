@@ -1,0 +1,38 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Delivery Details</h2>
+    <p class="subtitle">Please provide your contact info and shipping address to complete your order.</p>
+
+    <form (ngSubmit)="onSubmit()" #addressForm="ngForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" [(ngModel)]="profile.name" name="name" required placeholder="Enter full name">
+      </div>
+
+      <div class="form-group">
+        <label>Mobile Number (For WhatsApp Updates)</label>
+        <input type="tel" [(ngModel)]="profile.phone" name="phone" required placeholder="10-digit mobile number">
+      </div>
+
+      <div class="form-group">
+        <label>Flat / House No. / Street Address</label>
+        <textarea [(ngModel)]="profile.address" name="address" required placeholder="Complete delivery address"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" [(ngModel)]="profile.city" name="city" required placeholder="City">
+        </div>
+        <div class="form-group">
+          <label>Pincode</label>
+          <input type="text" [(ngModel)]="profile.pincode" name="pincode" required placeholder="6-digit code">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="!addressForm.form.valid">
+        Continue to Payment
+      </button>
+    </form>
+  </div>
+</div>

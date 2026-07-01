@@ -1,0 +1,46 @@
+<div class="details-container" *ngIf="product; else notFound">
+  <div class="details-grid">
+    <!-- Left: Product Image Area -->
+    <div class="image-gallery">
+      <button class="btn-back" routerLink="/shop">← Back to Collection</button>
+      <div class="main-image-wrapper">
+        
+        <img [src]="product.image" [alt]="product.name" class="product-image">
+      </div>
+    </div>
+
+    <!-- Right: Product Information & Actions -->
+    <div class="product-info-panel">
+      <div class="brand-tag">Atelier Milan Studio</div>
+      <h1 class="product-title">{{ product.name }}</h1>
+      <div class="product-price">₹{{ product.price }}</div>
+      
+      <hr class="divider">
+
+      <p class="product-description">
+        {{ product.description || 'A curated premium statement piece designed for modern elegance. Handcrafted with precision using high-grade materials to fit seamlessly into your personal collection style.' }}
+      </p>
+
+      <div class="shipping-perks">
+        <p>✨ Complimentary boutique packaging included</p>
+        <p>🚚 Free insured delivery across India</p>
+      </div>
+
+      <!-- Interaction Actions -->
+      <div class="purchase-actions">
+        <button class="btn-add-cart" (click)="addToBag()">
+          Add to Shopping Bag
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fallback State if ID doesn't exist -->
+<ng-template #notFound>
+  <div class="not-found-container">
+    <h2>Piece Not Found</h2>
+    <p>The product you are looking for does not exist or has been archived.</p>
+    <button class="btn-submit" routerLink="/shop">Return to Shop</button>
+  </div>
+</ng-template>

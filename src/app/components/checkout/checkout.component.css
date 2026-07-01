@@ -1,0 +1,192 @@
+.checkout-container {
+  background-color: #fcfcfc;
+  min-height: 100vh;
+  padding: 40px 4%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #111111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-card {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 850px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  overflow: hidden;
+}
+
+.checkout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-bottom: 1px solid #f4f4f5;
+}
+
+.btn-back {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #71717a;
+}
+
+.btn-back:hover {
+  color: #111111;
+}
+
+.checkout-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.checkout-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .checkout-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.order-summary {
+  padding: 40px;
+  border-right: 1px solid #f4f4f5;
+  background-color: #fafafa;
+}
+
+.order-summary h3, .qr-payment-box h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #3f3f46;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #111111;
+  padding-top: 20px;
+  font-weight: 700;
+}
+
+.total-amount {
+  font-size: 1.4rem;
+}
+
+/* QR Processing Space */
+.qr-payment-box {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.instruction {
+  font-size: 0.85rem;
+  color: #71717a;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.qr-code-wrapper {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.qr-image {
+  width: 200px;
+  height: 200px;
+  display: block;
+}
+
+.payment-details p {
+  font-size: 0.85rem;
+  margin: 4px 0;
+}
+
+.merchant-name {
+  color: #71717a;
+}
+
+.verification-note {
+  display: flex;
+  gap: 8px;
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 25px;
+  text-align: left;
+}
+
+.verification-note p {
+  font-size: 0.78rem;
+  color: #92400e;
+  line-height: 1.4;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #128C7E;
+}
+
+.btn-email {
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.btn-email:hover {
+  opacity: 0.9;
+}

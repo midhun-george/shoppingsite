@@ -1,0 +1,94 @@
+<div class="boutique-container">
+  <header class="boutique-header">
+    <div class="logo">ATELIER MILAN</div>
+    <button class="cart-trigger" (click)="toggleCart()">
+      🎒 <span class="cart-badge" *ngIf="shopService.cartCount() > 0">{{ shopService.cartCount() }}</span>
+    </button>
+  </header>
+
+<!-- Dynamic Hero Banner Section -->
+  <section class="hero-banner">
+    <div class="hero-slides-wrapper">
+      <div 
+        *ngFor="let slide of heroSlides; let i = index" 
+        class="hero-slide-pane"
+        [class.active]="currentSlideIndex() === i">
+        <div class="hero-overlay">
+          <h1>{{ slide.title }}</h1>
+          <p>{{ slide.subtitle }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation dots slider tracker -->
+    <div class="hero-dots">
+      <span 
+        *ngFor="let dot of heroSlides; let idx = index" 
+        class="dot"
+        [class.active]="currentSlideIndex() === idx"
+        (click)="goToSlide(idx)">
+      </span>
+    </div>
+  </section>
+
+  <!-- Premium Category Filter Bar -->
+  <nav class="category-nav">
+    <button 
+      *ngFor="let cat of categories" 
+      class="category-btn"
+      [class.active]="selectedCategory() === cat"
+      (click)="setCategory(cat)">
+      {{ cat }}
+    </button>
+  </nav>
+
+  <!-- 🔄 UPDATED: Iterating through filteredProducts() instead of raw products() -->
+  <main class="catalog-grid">
+    <div class="product-card" *ngFor="let product of filteredProducts()">
+      <div [routerLink]="['/shop/product', product.id]" class="product-image-wrapper">
+       <img [src]="product.image" [alt]="product.name" class="catalog-product-img">
+        <!-- Stop event propagation so clicking quick add doesn't open details page -->
+        <button class="btn-quick-add" (click)="shopService.addToCart(product); $event.stopPropagation()">
+          + Quick Add
+        </button>
+      </div>
+      <div class="product-info">
+        <span class="product-category">{{ product.category }}</span>
+        <h3 class="product-name" [routerLink]="['/shop/product', product.id]">{{ product.name }}</h3>
+        <p class="product-price">£{{ product.price }}</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="cart-drawer" [class.open]="isCartOpen()">
+    <div class="drawer-header">
+      <h2>Shopping Bag ({{ shopService.cartCount() }})</h2>
+      <button class="btn-close" (click)="toggleCart()">✕</button>
+    </div>
+
+    <div class="drawer-content">
+      <div class="empty-cart" *ngIf="shopService.cart().length === 0">
+        Your bag is currently empty.
+      </div>
+
+      <div class="cart-item" *ngFor="let item of shopService.cart()">
+        <img [src]="item.image" [alt]="item.name" class="cart-item-thumbnail">
+        <div class="item-details">
+          <h4>{{ item.name }}</h4>
+          <p>Qty: {{ item.quantity }} × £{{ item.price }}</p>
+        </div>
+        <button class="btn-remove" (click)="shopService.removeFromCart(item.id)">🗑️</button>
+      </div>
+    </div>
+
+    <div class="drawer-footer" *ngIf="shopService.cart().length > 0">
+      <div class="subtotal-row">
+        <span>Subtotal</span>
+        <span>£{{ shopService.cartTotal() }}</span>
+      </div>
+      <button class="btn-checkout" routerLink="/checkout" (click)="toggleCart()">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+</div>

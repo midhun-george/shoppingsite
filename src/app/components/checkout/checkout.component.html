@@ -1,0 +1,56 @@
+<div class="checkout-container">
+  <div class="checkout-card">
+    <header class="checkout-header">
+      <button class="btn-back" routerLink="/shop">← Return to Shop</button>
+      <h2>Secure UPI Checkout</h2>
+    </header>
+
+    <div class="checkout-body">
+      <!-- Left Column: Order Summary -->
+      <div class="order-summary">
+        <h3>Your Order Summary</h3>
+        <div class="summary-list">
+          <div class="summary-item" *ngFor="let item of shopService.cart()">
+            <span>{{ item.name }} (x{{ item.quantity }})</span>
+            <strong>₹{{ item.price * item.quantity }}</strong>
+          </div>
+        </div>
+        <div class="total-row">
+          <span>Amount to Pay:</span>
+          <span class="total-amount">₹{{ shopService.cartTotal() }}</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Scan to Pay Box -->
+      <div class="qr-payment-box">
+        <h3>Scan with Google Pay / Any UPI App</h3>
+        <p class="instruction">Scan the QR code below using your mobile payment app to complete your purchase instantly.</p>
+        
+        <!-- Dynamic QR Code Generator Render Wrapper -->
+        <div class="qr-code-wrapper">
+          <img [src]="qrCodeUrl" alt="Scan to Pay via Google Pay UPI" class="qr-image">
+        </div>
+
+        <div class="payment-details">
+          <p><strong>UPI ID:</strong> {{ upiId }}</p>
+          <p class="merchant-name"><strong>Merchant:</strong> {{merchantName}}</p>
+        </div>
+
+        <div class="verification-note">
+          ⚠️ <p>Once your payment is successful, please keep your transaction screenshot handy. Our team will verify it along with your order processing.</p>
+        </div>
+
+        <!-- Action Buttons to Confirm Payment -->
+<div class="action-buttons">
+  <button class="btn-whatsapp" (click)="sendWhatsAppConfirmation()">
+    💬 Share Order via WhatsApp
+  </button>
+  
+  <button class="btn-email" (click)="sendEmailConfirmation()">
+    ✉️ Email Order Details
+  </button>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
