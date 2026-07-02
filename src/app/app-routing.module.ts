@@ -5,11 +5,13 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { LoginComponent } from './components/login/login.component'; // We will create this next
 import { AuthGuard } from './guards/auth.guard';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { AdminComponent } from './components/admin/admin/admin.component';
 
 const routes: Routes = [
   { path: 'shop', component: BoutiqueComponent },
   { path: 'login', component: LoginComponent },
   { path: 'shop/product/:id', component: ProductDetailsComponent },
+  { path: 'admin', component: AdminComponent },
   { 
     path: 'checkout', 
     component: CheckoutComponent, 

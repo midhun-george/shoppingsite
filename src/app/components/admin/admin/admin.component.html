@@ -1,0 +1,117 @@
+<div class="admin-container">
+  <header class="admin-header">
+    <h2>🛠️ Store Inventory Manager</h2>
+    <p>Add, update, or remove items from the boutique display catalog.</p>
+  </header>
+
+  <div class="admin-grid-layout">
+    <!-- Left Column: Product Form -->
+    <div class="admin-form-card">
+      <h3>{{ isEditing ? '✏️ Modify Item Details' : '➕ Add New Item to Catalog' }}</h3>
+      <form (ngSubmit)="saveProduct()">
+        
+        <div class="control-box">
+          <label>Product Name</label>
+          <input type="text" [(ngModel)]="currentProduct.name" name="name" required placeholder="e.g., Silk Maxi Wrap Dress">
+        </div>
+
+        <div class="control-box-row">
+          <div class="control-box">
+            <label>Price (£)</label>
+            <input type="number" [(ngModel)]="currentProduct.price" name="price" required placeholder="0.00">
+          </div>
+          <div class="control-box">
+            <label>Category</label>
+            <select [(ngModel)]="currentProduct.category" name="category">
+              <option value="Clothing">Clothing</option>
+              <option value="Tops">Tops</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Jewelry">Jewelry</option>
+              <option value="Dresses">Dresses</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="control-box">
+          <label>Available Stock Inventory (Quantity)</label>
+          <input type="number" [(ngModel)]="currentProduct.stockCount" name="stockCount" required min="0" placeholder="e.g., 25">
+        </div>
+
+        <div class="control-box">
+          <label>Available Colors</label>
+          <div class="color-input-wrapper">
+            <input type="text" #colorInput placeholder="Type a color and click Add (e.g., Emerald)" (keyup.enter)="addColor(colorInput.value); colorInput.value = ''">
+            <button type="button" class="btn-add-color" (click)="addColor(colorInput.value); colorInput.value = ''">Add</button>
+          </div>
+          <div class="color-badges-strip" *ngIf="currentProduct.colors && currentProduct.colors.length > 0">
+            <span *ngFor="let color of currentProduct.colors; let i = index" class="color-badge">
+              {{ color }}
+              <button type="button" class="btn-remove-badge" (click)="removeColor(i)">×</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="control-box">
+          <label>Display Image URL</label>
+          <input type="text" [(ngModel)]="currentProduct.image" name="image" placeholder="https://images.unsplash.com/...">
+        </div>
+
+        <div class="control-box">
+          <label>Product Description</label>
+          <textarea [(ngModel)]="currentProduct.description" name="description" rows="3" placeholder="Fit, material finish..."></textarea>
+        </div>
+
+        <div class="action-strip">
+          <button type="submit" class="btn-publish">{{ isEditing ? 'Update Item' : 'Publish Product' }}</button>
+          <button type="button" *ngIf="isEditing" (click)="cancelEdit()" class="btn-clear">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Column: Live Inventory Grid (The part that went missing) -->
+    <div class="admin-inventory-card">
+      <h3>📦 Live Display Items ({{ shopService.products().length }})</h3>
+      <div class="table-scroll-wrapper">
+        <table class="inventory-table">
+          <thead>
+            <tr>
+              <th>Item Details</th>
+              <th>Stock / Colors</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prod of shopService.products()">
+              <td class="cell-main-info">
+                <img [src]="prod.image || 'assets/placeholder.jpg'" class="table-img-thumb" (error)="prod.image = 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=100'">
+                <div class="table-text-meta">
+                  <span class="table-item-name">{{ prod.name }}</span>
+                  <span class="cat-pill">{{ prod.category }}</span>
+                </div>
+              </td>
+              <td>
+                <div class="stock-meta-info">
+                  <span class="stock-count-indicator">🔢 Qty: <strong>{{ prod.stockCount || 0 }}</strong></span>
+                  <span class="colors-list-snippet" *ngIf="prod.colors && prod.colors.length > 0">
+                    🎨 {{ prod.colors.join(', ') }}
+                  </span>
+                </div>
+              </td>
+              <td><strong class="price-txt">£{{ prod.price | number:'1.2-2' }}</strong></td>
+              <td>
+                <div class="cell-actions">
+                  <button type="button" (click)="startEdit(prod)" class="mini-btn-edit" title="Edit Product">✏️</button>
+                  <button type="button" (click)="deleteProduct(prod.id)" class="mini-btn-delete" title="Delete Product">🗑️</button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="shopService.products().length === 0">
+              <td colspan="4" class="empty-state">No products found in the active storefront.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

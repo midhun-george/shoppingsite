@@ -1,0 +1,328 @@
+/* --- Base Theme Variables & Layout --- */
+:host {
+  display: block;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.admin-container {
+  padding: 40px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Form Header Styling --- */
+h3 {
+  font-size: 1.4rem;
+  color: #0f172a;
+  margin-top: 0;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 12px;
+}
+
+/* --- Centralized Card Container --- */
+.admin-form-card {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  max-width: 800px;
+  margin: 0 auto; /* Centers the workspace cleanly on wide monitors */
+}
+
+/* --- Form Row Splitting (Double Column Matrix) --- */
+.control-box-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .control-box-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* --- Individual Control Groups --- */
+.control-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.control-box label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Standard Form Inputs --- */
+input, select, textarea {
+  border: 1px solid #cbd5e1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #94a3b8;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  background-color: #fff;
+}
+
+/* --- Colors Input Strip Components --- */
+.color-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.color-input-wrapper input {
+  flex: 1;
+}
+
+.btn-add-color {
+  background: #1e293b;
+  color: #ffffff;
+  border: none;
+  padding: 0 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-add-color:hover {
+  background: #0f172a;
+}
+
+.color-badges-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+}
+
+.color-badge {
+  background: #e2e8f0;
+  color: #1e293b;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.btn-remove-badge {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* --- Action Control Buttons --- */
+.action-strip {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+button[type="submit"].btn-save-item, .btn-publish {
+  background: #6366f1;
+  color: #ffffff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex: 2;
+  transition: background 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+
+button[type="submit"].btn-save-item:hover, .btn-publish:hover {
+  background: #4f46e5;
+}
+
+button[type="submit"].btn-save-item:active, .btn-publish:active {
+  transform: scale(0.98);
+}
+
+.btn-clear {
+  background: #e2e8f0;
+  color: #334155;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex: 1;
+  transition: background 0.15s ease;
+}
+
+.btn-clear:hover {
+  background: #cbd5e1;
+}
+
+/* --- Multi-Column Grid Layout Split --- */
+.admin-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr; /* Sets side-by-side widths */
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .admin-grid-layout {
+    grid-template-columns: 1fr; /* Stacks column layout automatically on tablets or smaller windows */
+  }
+}
+
+.admin-form-card, .admin-inventory-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+/* --- Inventory Table Configurations --- */
+.table-scroll-wrapper {
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.inventory-table th {
+  background: #f8fafc;
+  padding: 14px;
+  border-bottom: 2px solid #e2e8f0;
+  color: #475569;
+  font-weight: 600;
+}
+
+.inventory-table td {
+  padding: 14px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.cell-main-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.table-text-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.table-item-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.table-img-thumb {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #f1f5f9;
+}
+
+.cat-pill {
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.stock-meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+}
+
+.colors-list-snippet {
+  color: #64748b;
+}
+
+.price-txt {
+  color: #0f172a;
+}
+
+/* --- Row Action Triggers --- */
+.cell-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.cell-actions button {
+  background: #f1f5f9;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s;
+  font-size: 0.9rem;
+}
+
+.cell-actions button:hover { background: #e2e8f0; }
+.cell-actions .mini-btn-delete:hover { background: #fee2e2; }
+
+.cell-actions button:active {
+  transform: scale(0.93);
+}
+
+.empty-state {
+  text-align: center;
+  color: #94a3b8;
+  padding: 40px 0;
+}
