@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+/* --- 3. Force Global Input Fluid Alignment --- */
+.checkout-cart-sidebar input,
+.checkout-cart-sidebar textarea,
+.checkout-cart-sidebar select,
+input, textarea, select {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important; /* Ensures borders/padding stay INSIDE the width */
+  display: block;
+}/* You can add global styles to this file, and also import other style files */

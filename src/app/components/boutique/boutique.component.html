@@ -32,7 +32,12 @@
   </section>
 
   <!-- Premium Category Filter Bar -->
-  <nav class="category-nav">
+  <nav class="category-nav category-nav-wrapper">
+    <div class="filter-action-bar">
+  <button class="btn-filter-trigger" (click)="toggleFilterWindow(true)">
+    ⚙️ Filter & Sort Products
+  </button>
+</div>
     <button 
       *ngFor="let cat of categories" 
       class="category-btn"
@@ -90,5 +95,60 @@
         Proceed to Checkout
       </button>
     </div>
+  </div>
+</div>
+
+<div class="filter-overlay-backdrop" [class.active]="isFilterWindowOpen" (click)="toggleFilterWindow(false)">
+  <div class="filter-window-card" (click)="$event.stopPropagation()">
+    
+<header class="filter-window-header">
+  <h3>Filter Options</h3>
+  <button class="btn-close-filter" (click)="toggleFilterWindow(false)">✕</button>
+</header>
+
+<div class="filter-window-body">
+  
+  <div class="filter-section">
+    <label>Sort By</label>
+    <select [ngModel]="activeFilters().sortBy" (ngModelChange)="updateSortBy($event)">
+      <option value="default">Default Features</option>
+      <option value="priceLowHigh">Price: Low to High</option>
+      <option value="priceHighLow">Price: High to Low</option>
+    </select>
+  </div>
+  <div class="filter-section">
+    <label>Filter By Brand</label>
+    <select [ngModel]="activeFilters().selectedBrand" (ngModelChange)="updateBrand($event)">
+      <option value="All">All Brands</option>
+      <option value="Atelier Milan">Atelier Milan</option>
+      <option value="xyz">XYZ</option>
+      <option value="abc">ABC</option>
+      <option value="Zara">Zara</option>
+      <option value="Mango">Mango</option>
+      <option value="Gucci">Gucci</option>
+      <option value="Minimalist Co">Minimalist Co</option>
+    </select>
+  </div>
+
+  <div class="filter-section">
+    <label>Max Price: <strong>₹{{ activeFilters().maxPrice }}</strong></label>
+    <input type="range" min="0" max="5000" step="100" 
+           [ngModel]="activeFilters().maxPrice" (ngModelChange)="updateMaxPrice($event)">
+  </div>
+
+  <div class="filter-section checkbox-toggle">
+    <label>
+      <input type="checkbox" [ngModel]="activeFilters().inStockOnly" (ngModelChange)="updateStock($event)">
+      In Stock Only
+    </label>
+  </div>
+
+</div>
+
+<footer class="filter-window-footer">
+  <button class="btn-reset-filters" (click)="resetFilters()">Clear All</button>
+  <button class="btn-apply-done" (click)="toggleFilterWindow(false)">See Results</button>
+</footer>
+
   </div>
 </div>

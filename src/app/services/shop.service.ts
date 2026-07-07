@@ -4,6 +4,7 @@ export interface Product {
   id: string;
   name: string;
   category: string;
+  brand: string; // 🏷️ Add this line right here!
   price: number;
   image: string;
   description: string;
@@ -27,6 +28,7 @@ export class ShopService {
       price: 145,
       image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&auto=format&fit=crop',
       category: 'Clothing',
+      brand:'abc',
       description: 'A structural, lightweight blazer crafted entirely from premium organic linen.', 
       stockCount:7, colors:['red','green', 'blue']
     },
@@ -36,6 +38,7 @@ export class ShopService {
       price: 180,
       image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500&auto=format&fit=crop',
       category: 'Clothing',
+      brand:'abc',
       description: 'An elegant bias-cut dress made from fluid washed mulberry silk.', stockCount:7, colors:['red','green', 'blue'],
 
     },
@@ -44,7 +47,8 @@ export class ShopService {
       name: 'Solid Gold Signet Ring',
       price: 320,
       image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&auto=format&fit=crop',
-      category: 'Jewelry'
+      category: 'Jewelry',
+      brand:'xyz'
       , stockCount:7, 
       colors:['red','green', 'blue'],
       description: 'Hand-burnished 14k recycled solid yellow gold ring.'
@@ -54,7 +58,7 @@ export class ShopService {
       name: 'Structured Leather Tote',
       price: 210,
       image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&auto=format&fit=crop',
-      category: 'Accessories',
+      category: 'Accessories',brand:'abc',
       description: 'Full-grain Italian calf leather shoulder bag with a micro-suede lining.', stockCount:7, colors:['red','green', 'blue']
     }
   ]);

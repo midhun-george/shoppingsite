@@ -458,3 +458,400 @@
   background-color: #111111;
   transform: scale(1.2);
 }
+
+/* --- Global Container Base Adjustments --- */
+.storefront-container {
+  max-width: 100%;
+  overflow-x: hidden; /* Prevents awkward horizontal screen shaking */
+  padding: 0 16px;
+}
+
+/* --- 1. Responsive Header / Navigation Bar --- */
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.brand-title {
+  font-size: 1.8rem; /* Scales down elegantly */
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 480px) {
+  .brand-title {
+    font-size: 1.4rem; /* Keeps name on a single line on small devices */
+  }
+}
+
+/* --- 2. Hero Carousel Mobile Adaptations --- */
+.hero-carousel {
+  position: relative;
+  height: 400px; /* Reduced fixed height on large views */
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.hero-slide {
+  height: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 📱 Carousel Mobile Overrides */
+@media (max-width: 640px) {
+  .hero-carousel {
+    height: 300px; /* Shorter header footprint on mobile */
+  }
+
+  .hero-slide h1 {
+    font-size: 1.8rem !important; /* Forces readable titles */
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .hero-slide p {
+    font-size: 0.9rem !important;
+    line-height: 1.4;
+  }
+}
+
+/* --- 3. Category Chips Scrolling Strip --- */
+.categories-nav-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto; /* Enables touch swiping for filter buttons */
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch; /* Smooth iOS momentum */
+}
+
+/* Hides scrollbars for a cleaner navigation appearance */
+.categories-nav-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.category-chip {
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  border-radius: 20px;
+}
+
+/* --- 4. Adaptive Catalog Product Grid --- */
+.products-display-grid {
+  display: grid;
+  /* 📱 Automatically handles column distribution mathematically based on size layout */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+@media (max-width: 480px) {
+  .products-display-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Double column on small phones */
+    gap: 12px; /* Tightens padding gaps */
+  }
+  
+  .product-card-info h4 {
+    font-size: 0.9rem; /* Trims text sizes */
+  }
+  
+  .product-card-info .price {
+    font-size: 0.85rem;
+  }
+}
+
+/* --- 5. Completely Mobile-Responsive Checkout Sidebar Modal --- */
+.checkout-cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 420px; /* Desktop Standard Width */
+  max-width: 100%; /* 📱 Critical override: Prevents stretching off screen borders on phones */
+  background: #ffffff;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Layout logic to handle scrollable lists inside the dynamic panel drawer */
+.cart-items-scrollarea {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.cart-item-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.checkout-summary-footer {
+  background: #f8fafc;
+  padding: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* 📱 Layout updates specific to mobile panels */
+@media (max-width: 480px) {
+  .checkout-cart-sidebar {
+    width: 100%; /* Takes up full screen viewport space on phones */
+  }
+
+  .cart-items-scrollarea {
+    padding: 16px;
+  }
+
+  .checkout-summary-footer {
+    padding: 16px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom)); /* Handles dynamic phone bottom notches */
+  }
+}
+
+/* --- 1. The Parent Wrapper/Container --- */
+.category-nav-wrapper,
+.categories-nav-strip,
+div[class*="category"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important; /* Forces items onto a single continuous line */
+  justify-content: flex-start !important; /* Starts items from the left side */
+  
+  width: 100% !important;
+  box-sizing: border-box !important;
+  
+  /* 📜 Triggers the horizontal scroll functionality */
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  
+  /* Adds smooth touch swiping momentum on mobile touchscreens */
+  -webkit-overflow-scrolling: touch !important;
+  
+  /* Generates comfortable spacing on the edges */
+  padding: 12px 16px !important;
+  margin-bottom: 16px !important;
+}
+
+/* --- 2. The Buttons Inside the Wrapper --- */
+.category-nav-wrapper button,
+.categories-nav-strip button,
+div[class*="category"] button,
+.category-chip {
+  flex: 0 0 auto !important; /* STOPS the browser from shrinking button sizes */
+  white-space: nowrap !important; /* STOPS 'DRESSES' from splitting or cutting off */
+  display: inline-block !important;
+  
+  /* Clean menu link aesthetics */
+  padding: 8px 16px !important;
+  font-size: 0.9rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* --- 3. Optional: Hide the default scrollbar line for a cleaner UI look --- */
+.category-nav-wrapper::-webkit-scrollbar,
+.categories-nav-strip::-webkit-scrollbar {
+  display: none !important;
+  height: 0 !important;
+}
+
+
+/* filter */
+/* --- Filter Trigger Button Box Strip --- */
+.filter-action-bar {
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+
+.btn-filter-trigger {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #334155;
+  transition: all 0.15s ease;
+}
+
+.btn-filter-trigger:hover {
+  background: #e2e8f0;
+}
+
+/* --- Modal Backdrop Darkening Cover Mask --- */
+.filter-overlay-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.4); /* Smooth frosted backdrop glass */
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.filter-overlay-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- Filter Modal Box Shell Configuration (Desktop View) --- */
+.filter-window-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-overlay-backdrop.active .filter-window-card {
+  transform: scale(1);
+}
+
+/* --- Header & Form Rows Inner Padding Systems --- */
+.filter-window-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.filter-window-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #0f172a;
+}
+
+.btn-close-filter {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.filter-window-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-section label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-section select,
+.filter-section input[type="range"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.checkbox-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: none;
+  font-size: 0.95rem;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+/* --- Footer Action Buttons Tray --- */
+.filter-window-footer {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+  border-top: 1px solid #f1f5f9;
+  background-color: #f8fafc;
+  border-radius: 0 0 16px 16px;
+}
+
+.filter-window-footer button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-reset-filters {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.btn-apply-done {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+/* 📱 📱 📱 Responsive Bottom-Sheet Slide System for Phones */
+@media (max-width: 580px) {
+  .filter-overlay-backdrop {
+    align-items: flex-end; /* Slides down flush up from phone base floor layout views */
+  }
+
+  .filter-window-card {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0; /* Rounded top corners only */
+    transform: translateY(100%); /* Slides down out of screen space when inactive */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .filter-overlay-backdrop.active .filter-window-card {
+    transform: translateY(0); /* Clean up-slide transition animation */
+  }
+  
+  .filter-window-footer {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom)); /* Handles dynamic phone bottom home indicators */
+  }
+}

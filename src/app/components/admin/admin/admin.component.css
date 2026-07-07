@@ -326,3 +326,171 @@ button[type="submit"].btn-save-item:active, .btn-publish:active {
   color: #94a3b8;
   padding: 40px 0;
 }
+
+/* --- Updated Container Shell --- */
+.admin-container {
+  padding: 16px; /* Reduced padding for mobile screen edges */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Multi-Column Grid Layout Split --- */
+.admin-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr; /* Side-by-side on desktop */
+  gap: 24px;
+  align-items: start;
+}
+
+/* 📱 Responsive Breakpoint for Tablets & Small Monitors */
+@media (max-width: 1024px) {
+  .admin-grid-layout {
+    grid-template-columns: 1fr; /* Stacks form above the list */
+    gap: 32px;
+  }
+}
+
+/* --- Form Row Splitting (Price & Category) --- */
+.control-box-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* 📱 NEW: Mobile Breakpoint for the Price/Category Split Row */
+@media (max-width: 580px) {
+  .control-box-row {
+    grid-template-columns: 1fr; /* Stacks Price above Category on phones */
+    gap: 0; /* Lets standard margin take over */
+  }
+  
+  .admin-form-card, .admin-inventory-card {
+    padding: 16px; /* Gives more room for inputs inside the cards */
+  }
+
+  .action-strip {
+    flex-direction: column; /* Stacks Update and Cancel buttons vertically */
+    gap: 8px;
+  }
+  
+  .action-strip button {
+    width: 100%;
+  }
+}
+
+/* --- Table Scrolling adjustments for Phones --- */
+.table-scroll-wrapper {
+  overflow-x: auto;
+  margin-top: 15px;
+  -webkit-overflow-scrolling: touch; /* Smooth swipe momentum scrolling on iOS devices */
+}
+
+.inventory-table {
+  min-width: 500px; /* Forces table layout parameters to stay readable without compressing data */
+}
+
+/* --- 1. Master Shell Fixes --- */
+.admin-container {
+  width: 100% !important;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box !important;
+}
+
+/* --- 2. Responsive Grid/Flex Breakpoint (Crucial Fix) --- */
+.admin-grid-layout {
+  display: flex !important;
+  flex-direction: column !important; /* Stack columns vertically on mobile */
+  gap: 24px;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Desktop Upgrade: If the screen is wider, make them side-by-side again */
+@media (min-width: 992px) {
+  .admin-grid-layout {
+    flex-direction: row !important;
+    align-items: flex-start;
+  }
+  
+  .admin-form-card {
+    flex: 1 1 40%; /* Form gets 40% space on desktop */
+  }
+  
+  .admin-inventory-card {
+    flex: 1 1 60%; /* Table gets 60% space on desktop */
+  }
+}
+
+/* --- 3. Fluid Card Shell Boundaries --- */
+.admin-form-card,
+.admin-inventory-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important; /* Includes inner padding inside 100% width math */
+}
+
+/* --- 4. Content Field Containers --- */
+.control-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin-bottom: 16px;
+}
+
+/* Handles side-by-side controls like Price and Category gracefully on mobile */
+.control-box-row {
+  display: flex;
+  flex-direction: column !important; /* Stack side-by-side inputs on mobile */
+  gap: 12px;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 576px) {
+  .control-box-row {
+    flex-direction: row !important; /* side-by-side layout for small tablets or wider */
+  }
+  .control-box-row .control-box {
+    flex: 1;
+    margin-bottom: 0;
+  }
+}
+
+/* --- 5. Force Inputs & Textareas inside bounds --- */
+.control-box input,
+.control-box select,
+.control-box textarea,
+.color-input-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important; /* Critical to prevent input width explosion */
+}
+
+.color-input-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.color-input-wrapper input {
+  flex: 1;
+}
+
+/* --- 6. Table Horizontal Scroll Safety Valve --- */
+.table-scroll-wrapper {
+  width: 100% !important;
+  overflow-x: auto !important; /* Allows users to swipe the list table without blowing out the page */
+  -webkit-overflow-scrolling: touch;
+}
+
+.inventory-table {
+  width: 100% !important;
+  border-collapse: collapse;
+  min-width: 500px; /* Ensures the table data maintains structural readability when swiped */
+}
